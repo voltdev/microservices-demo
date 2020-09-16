@@ -3,6 +3,7 @@ package io.pivotal.microservices.accounts;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.data.repository.Repository;
  * 
  * @author Paul Chapman
  */
-public interface AccountRepository extends Repository<Account, Long> {
+public interface AccountRepository extends CrudRepository<Account, Long> {
 	/**
 	 * Find an account with the specified account number.
 	 *
@@ -36,4 +37,7 @@ public interface AccountRepository extends Repository<Account, Long> {
 	 */
 	@Query("SELECT count(*) from Account")
 	public int countAccounts();
+
+	@Override
+	Iterable<Account> findAll();
 }

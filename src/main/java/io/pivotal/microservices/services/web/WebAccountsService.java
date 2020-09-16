@@ -82,4 +82,21 @@ public class WebAccountsService {
 		else
 			return account;
 	}
+
+	public List<Account> getAllAccounts() {
+		logger.info("getAllAccounts() invoked");
+		Account[] accounts = null;
+
+		try {
+			accounts = restTemplate.getForObject(serviceUrl
+					+ "/accounts", Account[].class);
+		} catch (HttpClientErrorException e) { // 404
+			// Nothing found
+		}
+
+		if (accounts == null || accounts.length == 0)
+			return null;
+		else
+			return Arrays.asList(accounts);
+	}
 }

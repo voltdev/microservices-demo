@@ -85,4 +85,19 @@ public class AccountsController {
 			return accounts;
 		}
 	}
+
+	@RequestMapping("/accounts")
+	public List<Account> getAll(){
+		logger.info("accounts-service getAll() invoked: "
+				+ accountRepository.getClass().getName() + " for all");
+
+		List<Account> accounts = (List<Account>) accountRepository.findAll();
+		logger.info("accounts-service getAll() found: " + accounts);
+
+		if (accounts == null || accounts.size() == 0)
+			throw new AccountNotFoundException("all");
+		else {
+			return accounts;
+		}
+	}
 }

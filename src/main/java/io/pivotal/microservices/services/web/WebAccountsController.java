@@ -93,4 +93,15 @@ public class WebAccountsController {
 			return ownerSearch(model, searchText);
 		}
 	}
+
+	@RequestMapping("/accounts/all")
+	public String getAllAccounts(Model model) {
+		logger.info("web-service getAllAccounts() invoked");
+
+		List<Account> accounts = accountsService.getAllAccounts();
+		logger.info("web-service accouts() found: " + accounts);
+		if (accounts != null)
+			model.addAttribute("accounts", accounts);
+		return "allAccounts";
+	}
 }
